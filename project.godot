@@ -1,0 +1,31 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="Godot Nightly"
+run/main_scene="res://Main.tscn"
+boot_splash/image="res://splash.png"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=470
+window/size/height=267
+window/size/resizable=false
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
