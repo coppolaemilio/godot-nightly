@@ -2,22 +2,32 @@ extends Control
 
 var current_os = OS.get_name()
 var download_link = ''
-var file_name = 'godot-nightly'
+var file_name = ''
+var file_name_prefix = 'godot-nightly'
+var file_ext = ''
 var date = ''
 var up_to_date = false
 
 func _ready():
-	# Get the proper OS selected on the Option Button. Windows is the default
-	$OSSelector.select(0)
-	if current_os == "OSX":
-		$OSSelector.select(1)
-	elif current_os == "X11":
-		$OSSelector.select(2)
-	
+	match current_os:
+		"Windows":
+			$OSSelector.select(0)
+			file_ext = ".zip"
+			_disable_arch(false)
+		"OSX":
+			$OSSelector.select(1)
+			file_ext = ".dmg"
+			_disable_arch(true)
+		"X11":
+			$OSSelector.select(2)
+			file_ext = ".AppImage"
+			_disable_arch(true)
+
 	# Add the date and extension to the file name to compare to previous versions
-	var date = OS.get_date(true)
+	date = OS.get_date(true)
 	date = str(date['day']) + '-' + str(date['month']) + '-' + str(date['year'])
-	file_name = file_name + '-' + date + ".zip"
+	_update_file_name()
+	
 
 	$ProgressBar.value = 0
 	up_to_date = is_up_to_date()
@@ -32,6 +42,7 @@ func is_up_to_date():
 		$DownloadButton.disabled = false
 		return true
 	return false
+
 
 func update_download_link():
 	# Get the proper download link
@@ -52,17 +63,30 @@ func _on_AboutButton_pressed():
 	$AboutDialog.popup()
 
 func _on_OSSelector_item_selected(ID):
-	if ID == 1 or ID == 2:
-		$SystemSelector.disabled = true
-		$SystemSelector.select(0)
-	else:
-		$SystemSelector.disabled = false
+	match ID:
+		0:
+			_disable_arch(false)
+		1:
+			file_ext = ".dmg"
+			_disable_arch(true)
+		2:
+			file_ext = ".AppImage"
+			_disable_arch(true)
+			
 	update_download_link()
+
+
+func _disable_arch(b):
+	$SystemSelector.disabled = b
+	$SystemSelector.select(0)
 
 func _on_SystemSelector_item_selected(_ID):
 	update_download_link()
+	up_to_date = false
 
 func _on_DownloadButton_pressed():
+	_update_file_name()
+	
 	var file_path = "user://" + file_name
 	
 	if up_to_date:
@@ -107,8 +131,12 @@ func _on_HTTPRequest_request_completed(result, response_code, _headers, _body):
 		up_to_date = is_up_to_date()
 		# Open the dir
 		OS.shell_open(OS.get_user_data_dir())
+	elif current_os == "X11":
+		OS.execute('/usr/bin/chmod', ['+x', cwd + '/' + file_name], false)
+		up_to_date = is_up_to_date()
+		OS.shell_open(OS.get_user_data_dir())
 	else:
-		print('Todo on linux and osx')
+		print('Todo on osx')
 
 func list_files_in_directory(path):
 	# By volzhs
@@ -135,3 +163,6 @@ func _on_Label2_meta_clicked(meta):
 
 func _on_Warning_meta_clicked(meta):
 	OS.shell_open(meta)
+	
+func _update_file_name():
+	file_name = file_name_prefix + '-' + date + file_ext

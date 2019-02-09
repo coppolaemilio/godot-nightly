@@ -109,7 +109,7 @@ margin_left = 106.0
 margin_top = 56.0
 margin_right = 146.0
 margin_bottom = 77.0
-text = "v0.1"
+text = "v0.1.1"
 
 [node name="Warning" type="RichTextLabel" parent="."]
 margin_left = 280.0
