@@ -1,7 +1,11 @@
 # Godot Nightly
 A program to download the latest version of Godot Nightly Builds.
 
+![Program Screenshot](./.gdignore/godot-nightly-screen.png)
+
+
 This launcher will download the latest unofficial builds from https://hugo.pro/projects/godot-builds/ and keep them up to date.
+
 
 ## Warning
 The stability of these builds is not guaranteed. Use them at your own risk.
