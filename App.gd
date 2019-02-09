@@ -65,6 +65,7 @@ func _on_AboutButton_pressed():
 func _on_OSSelector_item_selected(ID):
 	match ID:
 		0:
+			file_ext = ".zip"
 			_disable_arch(false)
 		1:
 			file_ext = ".dmg"

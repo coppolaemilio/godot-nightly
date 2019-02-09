@@ -139,10 +139,10 @@ margin_right = 342.0
 margin_bottom = 139.0
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
-bbcode_text = "Coded by [url=https://www.patreon.com/coppolaemilio]Emilio Coppola[/url] 2019. Made with [url=https://godotengine.org]Godot Engine[/url] 3.1
+bbcode_text = "Coded by [url=https://www.patreon.com/coppolaemilio]Emilio Coppola[/url] and [url=https://github.com/coppolaemilio/godot-nightly/graphs/contributors]contributors[/url] 2019. Made with [url=https://godotengine.org]Godot Engine[/url] 3.1
 Visit the [url=https://github.com/coppolaemilio/godot-nightly]repository[/url] to file bug reports or contribute!
 Builds from [url=https://hugo.pro/projects/godot-builds/]Hugo Lucurcio[/url]'s Unofficial Godot Engine builds"
-text = "Coded by Emilio Coppola 2019. Made with Godot Engine 3.1
+text = "Coded by Emilio Coppola and contributors 2019. Made with Godot Engine 3.1
 Visit the repository to file bug reports or contribute!
 Builds from Hugo Lucurcio's Unofficial Godot Engine builds"
 
