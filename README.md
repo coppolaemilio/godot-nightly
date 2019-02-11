@@ -9,7 +9,7 @@ This launcher will download the latest unofficial builds from https://hugo.pro/p
 
 ## Warning
 The stability of these builds is not guaranteed. Use them at your own risk.
-Official stable releases are available [here](https://godotengine.org/download/windows).
+Official stable releases are available [here](https://godotengine.org/download/).
 
 ---
 This program was created for one [of my videos](https://www.youtube.com/watch?v=WaUaNiq-5DY).
