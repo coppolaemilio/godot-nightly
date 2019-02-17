@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Lato-Regular-Font.tres" type="DynamicFontData" id=1]
 [ext_resource path="res://App.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://TitleBar.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -41,6 +42,7 @@ __meta__ = {
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 470.0
 margin_bottom = 267.0
+mouse_filter = 2
 color = Color( 0.0878906, 0.10467, 0.140625, 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -48,9 +50,9 @@ __meta__ = {
 
 [node name="SystemSelector" type="OptionButton" parent="."]
 margin_left = 160.0
-margin_top = 110.0
+margin_top = 127.0
 margin_right = 248.0
-margin_bottom = 140.0
+margin_bottom = 157.0
 text = "x64"
 flat = true
 items = [ "x64", null, false, -1, null, "x32", null, false, -1, null ]
@@ -58,9 +60,9 @@ selected = 0
 
 [node name="OSSelector" type="OptionButton" parent="."]
 margin_left = 20.0
-margin_top = 110.0
+margin_top = 127.0
 margin_right = 149.0
-margin_bottom = 140.0
+margin_bottom = 157.0
 text = "Windows"
 flat = true
 items = [ "Windows", null, false, -1, null, "Mac", null, false, -1, null, "Linux", null, false, -1, null ]
@@ -68,24 +70,24 @@ selected = 0
 
 [node name="DownloadButton" type="Button" parent="."]
 margin_left = 20.0
-margin_top = 150.0
+margin_top = 166.0
 margin_right = 250.0
-margin_bottom = 200.0
+margin_bottom = 216.0
 text = "Download"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 margin_left = 18.0
-margin_top = 220.0
+margin_top = 226.0
 margin_right = 450.0
-margin_bottom = 244.0
+margin_bottom = 250.0
 value = 56.08
 percent_visible = false
 
 [node name="Title" type="Label" parent="."]
 margin_left = 100.0
-margin_top = 20.0
+margin_top = 41.0
 margin_right = 310.0
-margin_bottom = 59.0
+margin_bottom = 80.0
 custom_fonts/font = SubResource( 3 )
 text = "Godot Nightly"
 align = 1
@@ -93,35 +95,36 @@ align = 1
 [node name="AboutButton" type="Button" parent="."]
 self_modulate = Color( 1, 1, 1, 0.415686 )
 margin_left = 380.0
-margin_top = 20.0
+margin_top = 41.0
 margin_right = 438.0
-margin_bottom = 47.0
+margin_bottom = 68.0
 text = "About"
 flat = true
 
 [node name="Logo" type="Sprite" parent="."]
-position = Vector2( 58, 48 )
+position = Vector2( 54, 69 )
 scale = Vector2( 0.875, 0.875 )
 texture = ExtResource( 3 )
 
 [node name="Version" type="Label" parent="."]
 margin_left = 106.0
-margin_top = 56.0
-margin_right = 146.0
-margin_bottom = 77.0
+margin_top = 77.0
+margin_right = 153.0
+margin_bottom = 98.0
 text = "v0.1.1"
 
 [node name="Warning" type="RichTextLabel" parent="."]
 margin_left = 280.0
-margin_top = 110.0
+margin_top = 127.0
 margin_right = 440.0
-margin_bottom = 210.0
+margin_bottom = 227.0
 custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "The stability of these builds is not guaranteed. Use them at your own risk. Official stable releases are available [url=https://godotengine.org/download]here[/url]."
 text = "The stability of these builds is not guaranteed. Use them at your own risk. Official stable releases are available here."
 
 [node name="AboutDialog" type="AcceptDialog" parent="."]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -148,6 +151,34 @@ Builds from Hugo Lucurcio's Unofficial Godot Engine builds"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
+[node name="TitleBar" type="Control" parent="."]
+anchor_right = 1.0
+margin_bottom = 33.0
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="TitleBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color( 0.138062, 0.166409, 0.226563, 1 )
+
+[node name="CloseButton" type="Button" parent="TitleBar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -31.0
+margin_top = 2.0
+margin_bottom = 29.0
+text = "X"
+flat = true
+
+[node name="MinimizeButton" type="Button" parent="TitleBar"]
+margin_left = 410.562
+margin_top = 2.0
+margin_right = 438.562
+margin_bottom = 29.0
+text = "_"
+flat = true
+
 [connection signal="item_selected" from="SystemSelector" to="." method="_on_SystemSelector_item_selected"]
 [connection signal="item_selected" from="OSSelector" to="." method="_on_OSSelector_item_selected"]
 [connection signal="pressed" from="DownloadButton" to="." method="_on_DownloadButton_pressed"]
@@ -155,3 +186,6 @@ Builds from Hugo Lucurcio's Unofficial Godot Engine builds"
 [connection signal="meta_clicked" from="Warning" to="." method="_on_Warning_meta_clicked"]
 [connection signal="meta_clicked" from="AboutDialog/Label2" to="." method="_on_Label2_meta_clicked"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="gui_input" from="TitleBar" to="TitleBar" method="_on_TitleBar_gui_input"]
+[connection signal="pressed" from="TitleBar/CloseButton" to="TitleBar" method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="TitleBar/MinimizeButton" to="TitleBar" method="_on_MinimizeButton_pressed"]
