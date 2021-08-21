@@ -47,13 +47,13 @@ func is_up_to_date():
 func update_download_link():
 	# Get the proper download link
 	if $OSSelector.selected == 0:
-		download_link = 'https://archive.hugo.pro/builds/godot/editor/godot-windows-nightly-x86_64.zip'
+		download_link = 'https://archive.hugo.pro/builds/godot/master/editor/godot-windows-nightly-x86_64.zip'
 		if $SystemSelector.selected == 1:
-			download_link = 'https://archive.hugo.pro/builds/godot/editor/godot-windows-nightly-x86.zip'
+			download_link = 'https://archive.hugo.pro/builds/godot/master/editor/godot-windows-nightly-x86.zip'
 	elif $OSSelector.selected == 1:
-		download_link = 'https://archive.hugo.pro/builds/godot/editor/godot-macos-nightly-x86_64.dmg'
+		download_link = 'https://archive.hugo.pro/builds/godot/master/editor/godot-macos-nightly-x86_64.dmg'
 	else:
-		download_link = 'https://archive.hugo.pro/builds/godot/editor/godot-linux-nightly-x86_64.AppImage'
+		download_link = 'https://archive.hugo.pro/builds/godot/master/editor/godot-linux-nightly-x86_64.zip'
 	
 	print('[+] Updating download link: ', download_link)
 
